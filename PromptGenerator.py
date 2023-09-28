@@ -1,7 +1,7 @@
 import g4f
 
 class PromptGenerator:
-    def __init__(self, provider=g4f.Provider.DeepAi, model="gpt-3.5-turbo"):
+    def __init__(self, provider=g4f.Provider.ChatBase, model="gpt-4"):
         self.model = model
         self.provider = provider
     def get_completion(self, prompt):
@@ -9,7 +9,7 @@ class PromptGenerator:
             provider=self.provider,
             model=self.model,
             messages=[{"role": "user", "content": prompt}],
-            temperature=0, # this is the degree of randomness of the model's output
+            temperature=0.1, # this is the degree of randomness of the model's output
         )
         return response
     def get_paper_answer(self, input):
@@ -46,4 +46,24 @@ class PromptGenerator:
             Step N - <step N>
         """
         prompt = f"""{instructions}\n```{input}```"""
+        return self.get_completion(prompt)
+
+        # Let's think step by step.
+    def get_question_answer(self, text):
+        instructions = fr"""
+        Your task is to help a student finish their math homework in the text delimited by triple backticks.
+        Please provide a step-by-step solution to the math problem presented below, ensuring accuracy and correctness in the methodology. Utilize the correct mathematical techniques and principles in your solution. 
+        Please format your solution in LaTeX, using the `\begin{{align*}}…\end{{align*}}` environment exclusively. Avoid using the `\[…\]` environment. 
+        Use $...$ for inline math mode.
+        After solving, kindly validate the correctness of your solution.
+        Problem: 
+        ```{text}```
+        """
+        # instructions = fr"""
+        # You are tasked with helping a student with their math homework in the text delimited by triple backticks. Please provide a comprehensive, step-by-step, and accurate solution to the problem below, using appropriate mathematical principles and techniques. Use LaTeX for formatting, employing the `\begin{{align*}}…\end{{align*}}` environment for equations and $...$ for inline math. 
+        # Validate the correctness of your solution.
+        # Problem:
+        # ```{text}```
+        # """
+        prompt = f"""{instructions}\n```{text}```"""
         return self.get_completion(prompt)

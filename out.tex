@@ -1,0 +1,65 @@
+\documentclass{article}
+\usepackage{amsmath, amsthm, amsfonts}
+\begin{document}
+To calculate the integral of sin(x)/x, we can use the technique of integration by parts. The formula for integration by parts is given by:
+
+\[
+\int u \, dv = uv - \int v \, du
+\]
+
+where u and v are functions of x.
+
+In this case, we can choose u = sin(x) and dv = \frac{1}{x} \, dx. Taking the derivatives and integrals, we have:
+
+du = \cos(x) \, dx
+v = \int \frac{1}{x} \, dx = \ln|x|
+
+Now we can substitute these values into the integration by parts formula:
+
+\[
+\int \frac{\sin(x)}{x} \, dx = \int u \, dv = uv - \int v \, du = \sin(x) \ln|x| - \int \ln|x| \cos(x) \, dx
+\]
+
+To evaluate the remaining integral, we can use integration by parts again. Let's choose u = \ln|x| and dv = \cos(x) \, dx. Taking the derivatives and integrals, we have:
+
+du = \frac{1}{x} \, dx
+v = \int \cos(x) \, dx = \sin(x)
+
+Substituting these values into the integration by parts formula, we get:
+
+\[
+\int \ln|x| \cos(x) \, dx = \ln|x| \sin(x) - \int \sin(x) \frac{1}{x} \, dx
+\]
+
+Now we have another integral to evaluate, but this time it's simpler. The integral of \frac{\sin(x)}{x} \, dx is a well-known integral called the sine integral, denoted as Si(x). Therefore, we have:
+
+\[
+\int \sin(x) \frac{1}{x} \, dx = Si(x)
+\]
+
+Substituting this back into the previous equation, we get:
+
+\[
+\int \ln|x| \cos(x) \, dx = \ln|x| \sin(x) - Si(x)
+\]
+
+Finally, substituting this result back into the original equation, we have:
+
+\[
+\int \frac{\sin(x)}{x} \, dx = \sin(x) \ln|x| - \ln|x| \sin(x) + Si(x)
+\]
+
+Simplifying this expression, we get:
+
+\[
+\int \frac{\sin(x)}{x} \, dx = Si(x)
+\]
+
+Therefore, the integral of sin(x)/x is Si(x).
+
+To validate the correctness of the solution, we can differentiate the result and check if it gives us back the original function. Differentiating Si(x) with respect to x gives us:
+
+\[
+\frac{d}{dx} Si(x) = \frac{\sin(x)}{x}
+\]
+\end{document}
